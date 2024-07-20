@@ -19,7 +19,6 @@ Change Data Capture (CDC) plays a vital role in data engineering by enabling rea
 ## Docker Compose Setup
 The provided Docker Compose file orchestrates the deployment of all necessary services, including MySQL, Debezium, Kafka, Zookeeper, Kafka UI, Apache Spark and Dalta format
 
-[Link to Docker Compose file](docker-compose-spark-kafka-mysql.yaml)
 
 ## Architecture
 The CDC pipeline follows the flow: MySQL ➔ CDC ➔ Debezium ➔ Kafka (Zookeeper) ➔ Apache Spark Streaming ➔ delta format
@@ -94,11 +93,7 @@ USE cdc;
 SHOW tables;
 ```
 
-INSERT INTO demo VALUES (1,"Richard","Hernandez","Brownsville"),\
-(2,"Mary","Barrett","Littleton"),\
-(3,"Ann","Smith","Caguas"),\
-(4,"Mary","Jones","San Marcos"),\
-(5,"Robert","Hudson","Caguas");
+Insert queries are present in ./data/example.sql
 
 ### Kafka Connector Debezium
 ```bash
@@ -120,4 +115,11 @@ docker-compose exec kafka /kafka/bin/kafka-console-consumer.sh \
     --from-beginning \
     --property print.key=true \
     --topic dbserver1.cdc.demo
+```
+
+### Spark commands
+Run spark submit command to call this job
+
+```bash
+docker exec -it {use_your_spark_docker_id_container} bash -c 'spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 /src/real_time_pipeline.py'
 ```
