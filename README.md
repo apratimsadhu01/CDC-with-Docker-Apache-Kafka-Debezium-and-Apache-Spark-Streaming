@@ -1,8 +1,6 @@
 # Change-Data-Capture-CDC-with-Docker-Apache-Kafka-Debezium-and-Apache-Spark-Streaming
 A small CDC example with kafka, debezium and spark in docker
 
-# Change Data Capture (CDC) with Docker, Apache Kafka, Debezium, Apache Spark Streaming and Apache Delta 
-
 ## Introduction
 
 ![Architecture](./img/archi.gif)
